@@ -60,6 +60,10 @@ export class AuthService {
     }
   }
 
+  async findAlll() {
+    return await this.userRepository.find();
+  }
+
   private handleDBErrors(error: any) {
     if (error.code == '23505') throw new BadRequestException(error.detail);
     console.log(error);
