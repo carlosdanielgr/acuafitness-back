@@ -64,6 +64,11 @@ export class AuthService {
     return await this.userRepository.find();
   }
 
+  async findUser(term: string) {
+    const sqlQuery = `SELECT * FROM users WHERE email LIKE '%' ${term}%'`;
+    return this.userRepository.query(sqlQuery);
+  }
+
   private handleDBErrors(error: any) {
     if (error.code == '23505') throw new BadRequestException(error.detail);
     console.log(error);

@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query } from '@nestjs/common';
 
 import { AuthService } from './auth.service';
 import { CreateUserDto, LoginUserDto } from './dto';
@@ -20,5 +20,10 @@ export class AuthController {
   @Get('users')
   getUsers() {
     return this.authService.findAlll();
+  }
+
+  @Get('search')
+  findUser(@Query('term') term: string) {
+    return this.authService.findUser(term);
   }
 }
